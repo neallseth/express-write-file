@@ -6,11 +6,9 @@ server.use(express.json());
 server.post("/create", async (req, res) => {
   try {
     const { name, contents } = req.body;
-    console.log(req.body);
     await fs.writeFile(`./storage/${name}.txt`, contents);
-    res.json({ res: `successfully created file: ${name}.txt` });
+    res.status(200).json({ res: `successfully created file: ${name}.txt` });
   } catch (err) {
-    console.log(err);
     res.status(500).json({ status: "error", msg: err });
   }
 });
